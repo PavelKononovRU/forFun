@@ -19,9 +19,9 @@ public class AdminController {
         this.personDetailsService = personDetailsService;
     }
     @GetMapping("/people")
-    public String getAllPersons(Model model, @AuthenticationPrincipal Person person) {
-        model.addAttribute("name", person.getUsername());
+    public String getAllPersons(Model model) {
        model.addAttribute("allPersons", personDetailsService.allPeople());
-       return "allPersons";
+       model.addAttribute("allRoles", personDetailsService.allRoles());
+        return "allPersons";
     }
 }

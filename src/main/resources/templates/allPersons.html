@@ -16,7 +16,7 @@
     <th>ID пользователя</th>
     <th>Username</th>
     <th>Password</th>
- <!--   <th>&lt;!&ndash;Роли&ndash;&gt;</th>-->
+    <th>Роли</th>
   </tr>
 
   <tbody>
@@ -25,7 +25,13 @@
     <td th:text="${person.getId()}"></td>
     <td th:text="${person.getUsername()}"></td>
     <td th:text="${person.getPassword()}"></td>
-    <td th:text="${person.getRoles()}"></td>
+    <td>
+      <table>
+        <tr>
+          <td th:each="role : ${person.getRoles()}" ,  th:text="${role.getRole()}"></td>
+        </tr>
+      </table>
+    </td>
 
     <!--Кнопка Информации-->
     <td>

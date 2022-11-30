@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -36,12 +37,12 @@ public class DataInitValues {
         roleRepo.save(admin);
 
         Person Pavel = personRepo.findPersonByUsername("Pavel");
-        if (Pavel == null) Pavel = new Person("Pavel", "apple", Set.of(user, admin));
+        if (Pavel == null) Pavel = new Person("Pavel", "apple", List.of(user, admin));
         Pavel.setPassword(passwordEncoder.encode(Pavel.getPassword()));
         personRepo.save(Pavel);
 
         Person hr = personRepo.findPersonByUsername("hr");
-        if (hr == null) hr = new Person("hr", "work", Set.of(user));
+        if (hr == null) hr = new Person("hr", "work", List.of(user));
         hr.setPassword(passwordEncoder.encode(hr.getPassword()));
         personRepo.save(hr);
     }
