@@ -45,5 +45,10 @@ public class DataInitValues {
         if (hr == null) hr = new Person("hr", "work", List.of(user));
         hr.setPassword(passwordEncoder.encode(hr.getPassword()));
         personRepo.save(hr);
+
+        Person employer = personRepo.findPersonByUsername("employer");
+        if (employer == null) employer = new Person("employer", "hardwork", List.of(user, admin));
+        employer.setPassword(passwordEncoder.encode(employer.getPassword()));
+        personRepo.save(employer);
     }
 }
