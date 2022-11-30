@@ -35,14 +35,14 @@ public class DataInitValues {
         if (admin == null) admin = new Role("ROLE_ADMIN");
         roleRepo.save(admin);
 
-        Person HR = personRepo.findPersonByUsername("HR");
-        if (HR == null) HR = new Person("HR", "cucumber", Set.of(user));
-        HR.setPassword(passwordEncoder.encode(HR.getPassword()));
-        personRepo.save(HR);
+        Person Pavel = personRepo.findPersonByUsername("Pavel");
+        if (Pavel == null) Pavel = new Person("Pavel", "apple", Set.of(user, admin));
+        Pavel.setPassword(passwordEncoder.encode(Pavel.getPassword()));
+        personRepo.save(Pavel);
 
-        Person chief = personRepo.findPersonByUsername("chief");
-        if (chief == null) chief = new Person("chief", "banana", Set.of(user, admin));
-        chief.setPassword(passwordEncoder.encode(chief.getPassword()));
-        personRepo.save(chief);
+        Person hr = personRepo.findPersonByUsername("hr");
+        if (hr == null) hr = new Person("hr", "work", Set.of(user));
+        hr.setPassword(passwordEncoder.encode(hr.getPassword()));
+        personRepo.save(hr);
     }
 }
