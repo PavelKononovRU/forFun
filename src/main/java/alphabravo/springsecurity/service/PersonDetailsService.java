@@ -51,6 +51,7 @@ public class PersonDetailsService implements UserDetailsService, PersonDetails {
     @Override
     @Transactional
     public void savePerson(Person person) {
+        person.setPassword(passwordEncoder.encode(person.getPassword()));
         personRepo.save(person);
     }
 }
