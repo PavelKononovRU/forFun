@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title> Create person</title>
+    <meta charset="UTF-8">
+    <title> Create person</title>
 </head>
 <body>
 <h2> Create person</h2>
 
 <form th:method="POST" th:action="@{/admin/people/newPerson/}" th:object="${newPerson}">
-  <label for="name">Enter name: </label>
-  <input type="text" th:field="*{name}" id="name"/>
-  <br/><br>
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br/><br>
 
-  <label for="surname">Enter surname: </label>
-  <input type="text" th:field="*{surname}" id="surname"/>
-  <br/><br>
+    <label for="surname">Enter surname: </label>
+    <input type="text" th:field="*{surname}" id="surname"/>
+    <br/><br>
 
-  <label for="email">Enter email: </label>
-  <input type="text" th:field="*{email}" id="email"/>
-  <br/><br>
+    <label for="email">Enter email: </label>
+    <input type="text" th:field="*{email}" id="email"/>
+    <br/><br>
 
-  <label for="age">Enter age: </label>
-  <input type="text" th:field="*{age}" id="age"/>
-  <br/><br>
+    <label for="age">Enter age: </label>
+    <input type="text" th:field="*{age}" id="age"/>
+    <br/><br>
 
-  <input type="submit" value="Create Person"/>
+    <input type="submit" value="Create Person"/>
 
 </form>
 

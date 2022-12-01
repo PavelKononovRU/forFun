@@ -5,31 +5,28 @@
     <title>Person Information</title>
 </head>
 <body>
-
-<h1> Person  information</h1>
+<h1 align="center">
+    <p><span th:text=" 'Привет, ' +  ${person.getName()} + ' , почитай немного о себе.' "></span></p>
+</h1>
 <br>
 
 <p> ID: <span th:text="${person.getId()}"></span></p>
-<p> Username: <span th:text="${person.getName()}"></span></p>
-<p> Password: <span th:text="${person.getSurname()}"></span></p>
+<p> Name: <span th:text="${person.getName()}"></span></p>
+<p> Surname: <span th:text="${person.getSurname()}"></span></p>
 <p> Email: <span th:text="${person.getEmail()}"></span></p>
 <p> Age: <span th:text="${person.getAge()}"></span></p>
 
+<td>
+    <form th:action="@{/logout}">
+        <button>Выход</button>
+    </form>
+</td>
 
-
-<!--<p> Роли: <span>
-    <table>
-        <tr>
-            <td th:each="role : ${person.getRoles()}" ,  th:text="${role.getRole()}"></td>
-        </tr>
-    </table>
-
-</span></p>-->
-
-<hr>
-
-
-<a href="/admin/people/"> Go To People Page</a>
+<td>
+    <form th:action="@{/admin/people/}">
+        <button title="Только для Адмирнитстраторов">Все пользователи</button>
+    </form>
+</td>
 
 </body>
 </html>

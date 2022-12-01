@@ -14,12 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class PersonDetailsService implements UserDetailsService,PersonDetails {
+public class PersonDetailsService implements UserDetailsService, PersonDetails {
     private final PersonRepo personRepo;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public PersonDetailsService(PersonRepo personRepo,@Lazy PasswordEncoder passwordEncoder) {
+    public PersonDetailsService(PersonRepo personRepo, @Lazy PasswordEncoder passwordEncoder) {
         this.personRepo = personRepo;
         this.passwordEncoder = passwordEncoder;
     }

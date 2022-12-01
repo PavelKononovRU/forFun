@@ -4,5 +4,5 @@ import alphabravo.springsecurity.model.Person;
 
 
 public interface PersonDetails {
-void savePerson(Person person);
+    void savePerson(Person person);
 }
