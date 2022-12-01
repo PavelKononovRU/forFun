@@ -50,7 +50,7 @@ public class DataInitValues {
 
         Person employer = personRepo.findPersonByUsername("employer");
         if (employer == null) employer = new Person("employer", "hardwork","Andrew", "Sneider",
-                57, "Andr456@gmail.com", List.of(user, admin));
+                57, "Andr456@gmail.com", List.of(user));
         employer.setPassword(passwordEncoder.encode(employer.getPassword()));
         personRepo.save(employer);
     }
