@@ -14,43 +14,47 @@
 
   <tr style="text-align: center">
     <th>ID пользователя</th>
-    <th>Username</th>
-    <th>Password</th>
-    <th>Роли</th>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Email</th>
+    <th>Age</th>
   </tr>
 
   <tbody>
   <tr th:each="person, iterstat : ${allPersons}" style="text-align: center">
 
     <td th:text="${person.getId()}"></td>
-    <td th:text="${person.getUsername()}"></td>
-    <td th:text="${person.getPassword()}"></td>
-    <td>
+    <td th:text="${person.getName()}"></td>
+    <td th:text="${person.getSurname()}"></td>
+    <td th:text="${person.getEmail()}"></td>
+    <td th:text="${person.getAge()}"></td>
+<!--    <td>
       <table>
         <tr>
           <td th:each="role : ${person.getRoles()}" ,  th:text="${role.getRole()}"></td>
         </tr>
       </table>
-    </td>
+    </td>-->
 
     <!--Кнопка Информации-->
     <td>
-      <form th:action="@{/admin/users/{id}(id=${person.getId()})}">
+      <form th:action="@{/admin/people/{id}(id=${person.getId()})}">
         <button> INFO</button>
       </form>
     </td>
 
     <!--Кнопка Удаления пользователя-->
     <td>
-      <form th:action="@{/admin/users/{id}(id=${person.getId()})}" th:method="DELETE">
+      <form th:action="@{/admin/people/{id}(id=${person.getId()})}" th:method="DELETE">
         <input type="submit" value="DELETE"/>
       </form>
     </td>
+
 <br>
     <!--Кнопка Обновления Информации-->
     <td>
-      <form th:action="@{/admin/users/{id}/edit(id=${person.getId()})}">
-        <button> UPDATE USER</button>
+      <form th:action="@{/admin/people/{id}/edit(id=${person.getId()})}">
+        <button> Update Person</button>
       </form>
     </td>
   </tbody>
@@ -60,7 +64,7 @@
 <br/>
 <hr/>
 
-<a href="/users/new">Create New User</a>
+<a href="/admin/people/newPerson">Create New User</a>
 
 </body>
 </html>

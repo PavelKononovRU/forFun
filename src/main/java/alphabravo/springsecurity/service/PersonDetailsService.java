@@ -1,27 +1,27 @@
 package alphabravo.springsecurity.service;
 
 import alphabravo.springsecurity.model.Person;
-import alphabravo.springsecurity.model.Role;
 import alphabravo.springsecurity.repositories.PersonRepo;
-import alphabravo.springsecurity.repositories.RoleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class PersonDetailsService implements UserDetailsService {
+public class PersonDetailsService implements UserDetailsService,PersonDetails {
     private final PersonRepo personRepo;
-    private final RoleRepo roleRepo;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public PersonDetailsService(PersonRepo personRepo, RoleRepo roleRepo) {
+    public PersonDetailsService(PersonRepo personRepo,@Lazy PasswordEncoder passwordEncoder) {
         this.personRepo = personRepo;
-        this.roleRepo = roleRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
@@ -29,8 +29,6 @@ public class PersonDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Person person = personRepo.findPersonByUsername(username);
         if (person == null) throw new UsernameNotFoundException("Incorrect Person");
-        System.out.println("Логин: " + person.getUsername() + " Пароль " + person.getPassword());
-        System.out.println(person.getPassword().length());
         return person;
     }
 
@@ -39,11 +37,20 @@ public class PersonDetailsService implements UserDetailsService {
         return personRepo.findAll();
     }
 
-    public List<Role> allRoles() {
-        List <Role> x = roleRepo.findAll();
-        for (Role y: x) {
-            y.getRole();
-        }
-        return x;
+    @Transactional
+    public void toUpdatePerson(long id, Person updatedPerson) {
+        Person personForUpdate = personRepo.findById(id).get();
+        personForUpdate.setId(updatedPerson.getId());
+        personForUpdate.setName(updatedPerson.getName());
+        personForUpdate.setSurname(updatedPerson.getSurname());
+        personForUpdate.setEmail(updatedPerson.getEmail());
+        personForUpdate.setAge(updatedPerson.getAge());
+        personRepo.save(personForUpdate);
+    }
+
+    @Override
+    @Transactional
+    public void savePerson(Person person) {
+        personRepo.save(person);
     }
 }

@@ -12,19 +12,31 @@ public class Person implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "username", unique = true)
+    @Column(name = "username")
     private String username;
     @Column(name = "password")
     private String password;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "surname")
+    private String surname;
+    @Column(name = "age")
+    private int age;
+    @Column(name = "email")
+    private String email;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "people_roles",
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
 
-    public Person(String username, String password, List<Role> roles) {
+    public Person(String username, String password, String name, String surname, int age, String email, List<Role> roles) {
         this.username = username;
         this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+        this.email = email;
         this.roles = roles;
     }
 
@@ -68,6 +80,38 @@ public class Person implements UserDetails {
     @Override
     public String getUsername() {
         return this.username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
