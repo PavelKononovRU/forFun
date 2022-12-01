@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Person Information</title>
+</head>
+<body>
+
+<h1> Person  information</h1>
+<br>
+
+<p> ID: <span th:text="${person.getId()}"></span></p>
+<p> Username: <span th:text="${person.getName()}"></span></p>
+<p> Password: <span th:text="${person.getSurname()}"></span></p>
+<p> Password: <span th:text="${person.getEmail()}"></span></p>
+<p> Password: <span th:text="${person.getAge()}"></span></p>
+
+
+
+<!--<p> Роли: <span>
+    <table>
+        <tr>
+            <td th:each="role : ${person.getRoles()}" ,  th:text="${role.getRole()}"></td>
+        </tr>
+    </table>
+
+</span></p>-->
+
+<hr>
+
+
+<a href="/admin/people/"> Go to people page</a>
+
+</body>
+</html>
