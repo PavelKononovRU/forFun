@@ -32,14 +32,10 @@ public class PersonDetailsService implements UserDetailsService, PersonDetails {
         return person;
     }
 
-    @Transactional
-    public List<Person> allPeople() {
-        return personRepo.findAll();
-    }
-
+    @Override
     @Transactional
     public void toUpdatePerson(long id, Person updatedPerson) {
-        Person personForUpdate = personRepo.findById(id).get();
+        Person personForUpdate = personRepo.findById(id).orElse(new Person());
         personForUpdate.setId(updatedPerson.getId());
         personForUpdate.setName(updatedPerson.getName());
         personForUpdate.setSurname(updatedPerson.getSurname());
@@ -53,5 +49,22 @@ public class PersonDetailsService implements UserDetailsService, PersonDetails {
     public void savePerson(Person person) {
         person.setPassword(passwordEncoder.encode(person.getPassword()));
         personRepo.save(person);
+    }
+
+    @Override
+    @Transactional
+    public void remove(long id) {
+        personRepo.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public Person getPersonId(long id) {
+        return personRepo.findById(id).orElse(new Person());
+    }
+
+    @Override
+    public List<Person> allPersons() {
+        return personRepo.findAll().stream().toList();
     }
 }

@@ -1,7 +1,6 @@
 package alphabravo.springsecurity.controller;
 
 import alphabravo.springsecurity.model.Person;
-import alphabravo.springsecurity.repositories.PersonRepo;
 import alphabravo.springsecurity.service.PersonDetails;
 import alphabravo.springsecurity.service.PersonDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,31 +15,29 @@ public class AdminController {
 
     private final PersonDetails personDetails;
 
-    private final PersonRepo personRepo;
-
     @Autowired
-    public AdminController(PersonDetailsService personDetailsService, PersonDetails personDetails, PersonRepo personRepo) {
+    public AdminController(PersonDetailsService personDetailsService, PersonDetails personDetails) {
         this.personDetailsService = personDetailsService;
         this.personDetails = personDetails;
-        this.personRepo = personRepo;
+
     }
 
     @GetMapping("/people")
     public String getAllPersons(Model model) {
-        model.addAttribute("allPersons", personDetailsService.allPeople());
+        model.addAttribute("allPersons", personDetailsService.allPersons());
         return "allPersons";
     }
 
     @GetMapping("/people/{id}")
     public String getUser(@PathVariable long id, Model model) {
-        model.addAttribute("person", personRepo.findById(id).get());
+        model.addAttribute("person", personDetailsService.getPersonId(id));
         return "user";
     }
 
     /*Удаление*/
     @DeleteMapping("/people/{id}")
     public String delete(@PathVariable long id) {
-        personRepo.deleteById(id);
+        personDetailsService.remove(id);
         return "redirect:/admin/people/";
     }
 
@@ -60,7 +57,7 @@ public class AdminController {
 
     @GetMapping("/people/{id}/edit")
     public String edit(Model model, @PathVariable long id) {
-        model.addAttribute("editPerson", personRepo.findById(id).get());
+        model.addAttribute("editPerson", personDetailsService.getPersonId(id));
         return "edit";
     }
 
