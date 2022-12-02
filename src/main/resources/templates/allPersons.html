@@ -24,7 +24,7 @@
     <tr th:each="person, iterstat : ${allPersons}" style="text-align: center">
 
         <td th:text="${person.getId()}"></td>
-        <td th:text="'Привет' + ${person.getName()}"></td>
+        <td th:text="${person.getName()}"></td>
         <td th:text="${person.getSurname()}"></td>
         <td th:text="${person.getEmail()}"></td>
         <td th:text="${person.getAge()}"></td>
