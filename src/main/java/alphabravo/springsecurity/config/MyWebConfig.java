@@ -17,12 +17,10 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 public class MyWebConfig extends WebSecurityConfigurerAdapter {
     private final PersonDetailsService personDetailsService;
 
-    private final SuccessPersonHandler successPersonHandler;
 
     @Autowired
-    public MyWebConfig(PersonDetailsService personDetailsService, SuccessPersonHandler successPersonHandler) {
+    public MyWebConfig(PersonDetailsService personDetailsService) {
         this.personDetailsService = personDetailsService;
-        this.successPersonHandler = successPersonHandler;
     }
 
     @Bean
@@ -52,10 +50,10 @@ public class MyWebConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
 
                 .and()
-                    .formLogin().failureForwardUrl("/HelloPage").successForwardUrl("/userinfo")
+                .formLogin().failureForwardUrl("/HelloPage").successForwardUrl("/userinfo")
                 .and()
-                    .logout()
+                .logout()
                 .and()
-                    .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class PersonDetailsService implements UserDetailsService, PersonDetails {
     private final PersonRepo personRepo;
     private final PasswordEncoder passwordEncoder;
@@ -24,7 +25,6 @@ public class PersonDetailsService implements UserDetailsService, PersonDetails {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Person person = personRepo.findPersonByUsername(username);
@@ -58,7 +58,6 @@ public class PersonDetailsService implements UserDetailsService, PersonDetails {
     }
 
     @Override
-    @Transactional
     public Person getPersonId(long id) {
         return personRepo.findById(id).orElse(new Person());
     }
