@@ -33,7 +33,6 @@ public class PersonDetailsService implements UserDetailsService, PersonDetails {
     }
 
     @Override
-    @Transactional
     public void toUpdatePerson(long id, Person updatedPerson) {
         Person personForUpdate = personRepo.findById(id).orElse(new Person());
         personForUpdate.setId(updatedPerson.getId());
