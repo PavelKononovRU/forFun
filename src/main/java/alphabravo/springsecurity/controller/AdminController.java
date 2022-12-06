@@ -40,10 +40,10 @@ public class AdminController {
     /*Создание*/
     @GetMapping("/people/newPerson")
     public String addNewUser(@ModelAttribute("newPerson") Person person) {
-        return "create";
+        return "ToReplaceForAdmin";
     }
 
-    @PostMapping("people/newPerson/")
+    @PostMapping("/people/newPerson/")
     public String saveUser(@ModelAttribute("newPerson") Person person) {
         personDetails.savePerson(person);
         return "redirect:/admin/people/";
