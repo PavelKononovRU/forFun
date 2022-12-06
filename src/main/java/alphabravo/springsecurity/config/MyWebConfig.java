@@ -50,7 +50,7 @@ public class MyWebConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
 
                 .and()
-                .formLogin().failureForwardUrl("/HelloPage").successForwardUrl("/userinfo")
+                .formLogin().failureForwardUrl("/HelloPage")//.successForwardUrl("/userinfo")
                 .and()
                 .logout()
                 .and()

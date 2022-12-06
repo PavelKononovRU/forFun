@@ -1,3 +1,4 @@
+/*
 package alphabravo.springsecurity.controller;
 
 import alphabravo.springsecurity.model.Person;
@@ -27,17 +28,13 @@ public class HelloController {
         return "HelloPage";
     }
 
-    @GetMapping("/user/{id}")
-    public String toReplace(@PathVariable long id, Model model) {
-        model.addAttribute("personAdm", personDetailsService.getPersonId(id));
-        return "toReplace";
-    }
-
     @GetMapping("/admin/{id}")
-    public String ToReplaceForAdmin(@PathVariable long id, Model model) {
+    public String ToReplaceForAdmin(@PathVariable long id, Model model,
+                                    @AuthenticationPrincipal ) {
         model.addAttribute("person", personDetailsService.getPersonId(id));
         model.addAttribute("people", personDetailsService.allPersons());
         model.addAttribute("allRoles", roleService.getAllRoles());
         return "ToReplaceForAdmin";
     }
 }
+*/

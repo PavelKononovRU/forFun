@@ -1,3 +1,4 @@
+/*
 package alphabravo.springsecurity.controller;
 
 import alphabravo.springsecurity.model.Person;
@@ -30,14 +31,18 @@ public class AdminController {
         return "user";
     }
 
-    /*Удаление*/
+    */
+/*Удаление*//*
+
     @DeleteMapping("/people/{id}")
     public String delete(@PathVariable long id) {
         personDetails.remove(id);
         return "redirect:/admin/people/";
     }
 
-    /*Создание*/
+    */
+/*Создание*//*
+
     @GetMapping("/people/newPerson")
     public String addNewUser(@ModelAttribute("newPerson") Person person) {
         return "ToReplaceForAdmin";
@@ -49,7 +54,9 @@ public class AdminController {
         return "redirect:/admin/people/";
     }
 
-    /*Обновление*/
+    */
+/*Обновление*//*
+
 
     @GetMapping("/people/{id}/edit")
     public String edit(Model model, @PathVariable long id) {
@@ -64,3 +71,4 @@ public class AdminController {
         return "redirect:/admin/people/";
     }
 }
+*/

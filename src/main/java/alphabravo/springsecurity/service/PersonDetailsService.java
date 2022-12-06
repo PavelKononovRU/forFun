@@ -40,6 +40,9 @@ public class PersonDetailsService implements UserDetailsService, PersonDetails {
         personForUpdate.setSurname(updatedPerson.getSurname());
         personForUpdate.setEmail(updatedPerson.getEmail());
         personForUpdate.setAge(updatedPerson.getAge());
+        personForUpdate.setUsername(updatedPerson.getUsername());
+        personForUpdate.setPassword(updatedPerson.getPassword());
+        personForUpdate.setRoles(updatedPerson.getRoles());
         personRepo.save(personForUpdate);
     }
 
@@ -63,6 +66,6 @@ public class PersonDetailsService implements UserDetailsService, PersonDetails {
 
     @Override
     public List<Person> allPersons() {
-        return personRepo.findAll().stream().toList();
+        return personRepo.findAll();
     }
 }
