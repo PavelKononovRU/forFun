@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class PersonDetailsService implements UserDetailsService, PersonDetails {
     private final PersonRepo personRepo;
     private final PasswordEncoder passwordEncoder;
