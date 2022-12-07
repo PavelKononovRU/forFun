@@ -44,13 +44,13 @@ public class MyWebConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
 
                 .authorizeRequests()
-                //.antMatchers("/admin/**").hasRole("ADMIN")
-                //.antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/login", "/HelloPage/", "/access").permitAll()
+                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
 
                 .and()
-                .formLogin().failureForwardUrl("/HelloPage")//.successForwardUrl("/userinfo")
+                .formLogin().defaultSuccessUrl("/user", true)
                 .and()
                 .logout()
                 .and()

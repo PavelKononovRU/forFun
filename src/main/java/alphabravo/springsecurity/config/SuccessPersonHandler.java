@@ -1,4 +1,4 @@
-package alphabravo.springsecurity.config;
+/*package alphabravo.springsecurity.config;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -25,4 +25,4 @@ public class SuccessPersonHandler implements AuthenticationSuccessHandler {
         } else httpServletResponse.sendRedirect("/HelloPage");
 
     }
-}
+}*/

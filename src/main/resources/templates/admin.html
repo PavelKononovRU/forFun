@@ -86,7 +86,8 @@
                                                     Edit
                                                 </button>
                                                 <!--Modal EDIT-->
-                                                <div id="editModal" th:attrappend="id=${user.getId()}" class="modal fade">
+                                                <div id="editModal" th:attrappend="id=${user.getId()}"
+                                                     class="modal fade">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -97,7 +98,8 @@
                                                             <div class="modal-body">
                                                                 <form id="editForm" th:method="PATCH"
                                                                       th:action="@{/admin/update/{id}(id=${user.getId()})}"
-                                                                      th:object="${user}" th:attrappend="id=${user.getId()}"
+                                                                      th:object="${user}"
+                                                                      th:attrappend="id=${user.getId()}"
                                                                       class="text-center">
                                                                     <div class="container col-6">
                                                                         <div class="mb-3">
@@ -141,14 +143,16 @@
                                                                             <label class="form-label fw-bold"
                                                                                    for="editUsername">Username</label>
                                                                             <input th:value="*{username}" type="text"
-                                                                                   id="editUsername" class="form-control"
+                                                                                   id="editUsername"
+                                                                                   class="form-control"
                                                                                    name="username">
                                                                         </div>
 
                                                                         <div class="mb-3">
                                                                             <label class="form-label fw-bold"
                                                                                    for="editPassword">Password</label>
-                                                                            <input th:value="*{password}" type="password" id="editPassword"
+                                                                            <input th:value="*{password}"
+                                                                                   type="password" id="editPassword"
                                                                                    class="form-control" name="password"
                                                                                    placeholder="Password">
                                                                         </div>
@@ -188,7 +192,8 @@
                                                     Delete
                                                 </button>
                                                 <!--Modal DELETE-->
-                                                <div id="deleteModal" th:attrappend="id=${user.getId()}" class="modal fade">
+                                                <div id="deleteModal" th:attrappend="id=${user.getId()}"
+                                                     class="modal fade">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -199,7 +204,8 @@
                                                             <div class="modal-body">
                                                                 <form id="deleteForm" th:method="DELETE"
                                                                       th:action="@{/admin/delete/{id}(id=${user.getId()})}"
-                                                                      th:object="${user}" th:attrappend="id=${user.getId()}"
+                                                                      th:object="${user}"
+                                                                      th:attrappend="id=${user.getId()}"
                                                                       class="text-center">
                                                                     <div class="container col-6">
                                                                         <div class="mb-3">
@@ -289,7 +295,8 @@
                             <tr>
                                 <td>
                                     <div class="container col-4">
-                                        <form th:method="POST" th:action="@{/admin/create/new}" th:object="${personForCreate}"
+                                        <form th:method="POST" th:action="@{/admin/create/new}"
+                                              th:object="${personForCreate}"
                                               class="text-center">
                                             <label class="form-label fw-bold  mt-3" for="name">Name</label>
                                             <input class="form-control" type="text" id="name"
@@ -312,7 +319,8 @@
                                                    th:field="*{username}">
 
                                             <label class="form-label fw-bold  mt-3" for="password">Password</label>
-                                            <input class="form-control" type="password" id="password" placeholder="Password"
+                                            <input class="form-control" type="password" id="password"
+                                                   placeholder="Password"
                                                    th:field="*{password}">
 
                                             <label class="form-label fw-bold  mt-3" for="roles">Roles</label>

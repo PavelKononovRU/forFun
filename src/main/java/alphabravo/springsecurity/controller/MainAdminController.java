@@ -17,6 +17,7 @@ public class MainAdminController {
     private final RoleRepo roleRepo;
 
     private final PersonDetailsService personDetailsService;
+
     @Autowired
     public MainAdminController(PersonRepo personRepo, RoleRepo roleRepo, PersonDetailsService personDetailsService) {
         this.personRepo = personRepo;
@@ -42,7 +43,7 @@ public class MainAdminController {
 
     /*Обновление*/
     @PatchMapping("/update/{id}")
-    public String update(@PathVariable long id,Person person) {
+    public String update(@PathVariable long id, Person person) {
         personDetailsService.toUpdatePerson(id, person);
         return "redirect:/admin";
     }
