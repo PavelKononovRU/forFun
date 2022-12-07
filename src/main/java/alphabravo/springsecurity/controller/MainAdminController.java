@@ -1,9 +1,8 @@
 package alphabravo.springsecurity.controller;
 
 import alphabravo.springsecurity.model.Person;
-import alphabravo.springsecurity.repositories.PersonRepo;
-import alphabravo.springsecurity.repositories.RoleRepo;
 import alphabravo.springsecurity.service.PersonDetailsService;
+import alphabravo.springsecurity.service.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -13,23 +12,21 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admin")
 @Controller
 public class MainAdminController {
-    private final PersonRepo personRepo;
-    private final RoleRepo roleRepo;
+    private final RoleServiceImpl roleService;
 
     private final PersonDetailsService personDetailsService;
 
     @Autowired
-    public MainAdminController(PersonRepo personRepo, RoleRepo roleRepo, PersonDetailsService personDetailsService) {
-        this.personRepo = personRepo;
-        this.roleRepo = roleRepo;
+    public MainAdminController(RoleServiceImpl roleService, PersonDetailsService personDetailsService) {
+        this.roleService = roleService;
         this.personDetailsService = personDetailsService;
     }
 
     @GetMapping
     public String peopleInfo(@AuthenticationPrincipal Person person, Model model) {
-        model.addAttribute("currentPerson", personRepo.findPersonByUsername(person.getUsername()));
-        model.addAttribute("people", personRepo.findAll());
-        model.addAttribute("allRoles", roleRepo.findAll());
+        model.addAttribute("currentPerson", personDetailsService.loadUserByUsername(person.getUsername()));
+        model.addAttribute("people", personDetailsService.allPersons());
+        model.addAttribute("allRoles", roleService.getAllRoles());
         model.addAttribute("personForCreate", new Person());
         return "admin";
     }
