@@ -1,16 +1,20 @@
 package alphabravo.springsecurity.controller;
 
+import alphabravo.springsecurity.ExceptionHandler.NoSuchPersonException;
+import alphabravo.springsecurity.ExceptionHandling.ExceptionInformation;
 import alphabravo.springsecurity.model.Person;
 import alphabravo.springsecurity.service.PersonDetailsService;
 import alphabravo.springsecurity.service.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+/*@CrossOrigin*/
 @RequestMapping("/admin")
-@Controller
+@RestController
 public class MainAdminController {
     private final RoleServiceImpl roleService;
 
@@ -22,33 +26,49 @@ public class MainAdminController {
         this.personDetailsService = personDetailsService;
     }
 
-    @GetMapping
-    public String peopleInfo(@AuthenticationPrincipal Person person, Model model) {
-        model.addAttribute("currentPerson", personDetailsService.loadUserByUsername(person.getUsername()));
-        model.addAttribute("people", personDetailsService.allPersons());
-        model.addAttribute("allRoles", roleService.getAllRoles());
-        model.addAttribute("personForCreate", new Person());
-        return "admin";
+    /*Получение всех пользователей*/
+    @GetMapping("/people")
+    public List<Person> peopleInfo() {
+        return personDetailsService.allPersons();
     }
 
-    /*Удаление*/
-    @DeleteMapping("/delete/{id}")
+    /*Получение конкретного пользователя по id*/
+    @GetMapping("/person/{id}")
+    public Person getPerson(@PathVariable long id) {
+        Person person = personDetailsService.getPersonId(id);
+        if (person == null) throw new NoSuchPersonException("Person with id= " + id + " was not found");
+        return person;
+    }
+
+    /*Удаление пользователя по id*/
+    @DeleteMapping("/person/{id}")
     public String delete(@PathVariable long id) {
+        Person person = personDetailsService.getPersonId(id);
+        if (person == null) throw new NoSuchPersonException("Person not Found");
         personDetailsService.remove(id);
-        return "redirect:/admin";
+
+        return "Person was deleted";
     }
 
-    /*Обновление*/
-    @PatchMapping("/update/{id}")
-    public String update(@PathVariable long id, Person person) {
-        personDetailsService.toUpdatePerson(id, person);
-        return "redirect:/admin";
-    }
-
-    /*Создание*/
-    @PostMapping("/create/new")
-    public String create(@ModelAttribute("personForCreate") Person person) {
+    /*Добавление нового пользователя*/
+    @PostMapping("/people")
+    public String addNewPerson(@RequestBody Person person) {
         personDetailsService.savePerson(person);
-        return "redirect:/admin";
+        return "Person was added";
+    }
+
+    /*Обновление пользователя*/
+    @PutMapping("/people")
+    public String updatePerson(@RequestBody Person person) {
+        personDetailsService.savePerson(person);
+        return "Person was updated";
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ExceptionInformation> handler(NoSuchPersonException exception) {
+        ExceptionInformation data = new ExceptionInformation();
+        data.setInform(exception.getMessage());
+        return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
     }
 }
+
