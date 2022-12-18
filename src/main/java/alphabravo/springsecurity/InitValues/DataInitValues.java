@@ -43,6 +43,18 @@ public class DataInitValues {
         Pavel.setPassword(passwordEncoder.encode(Pavel.getPassword()));
         personRepo.save(Pavel);
 
+        Person Dima = personRepo.findPersonByUsername("Dima");
+        if (Dima == null) Dima = new Person("Dima", "green", "Dima",
+                "Pomazkov", 29, "lovecars527@gmail.com", List.of(user));
+        Dima.setPassword(passwordEncoder.encode(Dima.getPassword()));
+        personRepo.save(Dima);
+
+        Person Nikita = personRepo.findPersonByUsername("Nikita");
+        if (Nikita == null) Nikita = new Person("Nikita", "purple", "Nikita",
+                "Promyschlennikov", 26, "Promyh67527@gmail.com", List.of(user));
+        Nikita.setPassword(passwordEncoder.encode(Nikita.getPassword()));
+        personRepo.save(Nikita);
+
         Person hr = personRepo.findPersonByUsername("hr");
         if (hr == null) hr = new Person("hr", "work", "John", "Peterson", 43,
                 "Peterson6@gmail.com", List.of(user));

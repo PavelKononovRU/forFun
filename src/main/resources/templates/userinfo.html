@@ -100,14 +100,17 @@
     let result = '';
 
     const show = (users) => {
+        //let roles = '';
         users.forEach(user => {
+            let getRoles = '';
+            user.roles.forEach(r =>getRoles += r.role.substring(5) + ' ');
             result += `   <tr>
                         <td>${user.id}</td>
                         <td>${user.name}</td>
                         <td>${user.surname}</td>
                         <td>${user.email}</td>
                         <td>${user.age}</td>
-                        <td>${user.role}</td>
+                        <td>${getRoles}</td>
                     </tr>
                  `
             container.innerHTML = result;
@@ -117,10 +120,8 @@
     fetch(url)
         .then(res => res.json())
         .then(data => show(data))
-        .then(x => console.log(x))
         .catch(error => console.log(error))
 
-    console.log(show);
 </script>
 </body>
 </html>
