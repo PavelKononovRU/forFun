@@ -16,8 +16,8 @@
     <div class="text-white w-100 pb-1 fs-4">
         <span class="align-middle ms-3  fw-bold" id="auth_name">piska</span>
         <span class="align-middle">with roles:</span>
-        <span class="align-middle" th:each="role : ${person.getRoles()}">
-            <span th:text="${role.getRole().substring(5)}"/>
+        <span class="align-middle">
+            <span id="auth_roles"></span>
         </span>
     </div>
     <form th:action="@{/logout}" method="post">
@@ -60,21 +60,6 @@
                                 </tr>
                                 </thead>
                                 <tbody id="tbody">
-                                <!--                                <tr>
-                                                                    <td th:text="${person.getId()}">{ID}</td>
-                                                                    <td th:text="${person.getName()}">{First Name}</td>
-                                                                    <td th:text="${person.getSurname()}">{Last Name}</td>
-                                                                    <td th:text="${person.getEmail()}">{Age}</td>
-                                                                    <td th:text="${person.getAge()}">{Email}</td>
-                                                                    <td>
-                                                                        <table>
-                                                                            <tr>
-                                                                                <td th:each="role : ${person.getRoles()}"
-                                                                                    th:text="${role.getRole().substring(5)}"/>
-                                                                            </tr>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>-->
                                 </tbody>
                             </table>
                         </td>
@@ -93,15 +78,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
     const url = "http://localhost:8080/admin/people";
-
-    const credentials = btoa("Pavel:apple")
-
     const container = document.querySelector('#tbody');
-
     let result = '';
-
     const show = (users) => {
-        //let roles = '';
         users.forEach(user => {
             let getRoles = '';
             user.roles.forEach(r =>getRoles += r.role.substring(5) + ' ');
@@ -123,30 +102,20 @@
         .then(data => show(data))
         .catch(error => console.log(error))
 </script>
+
 <script>
-/*        const name = document.querySelector('#auth_name');
-        const roles = document.querySelector('#auth_roles');
+async function getPrincipal() {
+    let principal = await fetch('http://localhost:8080/admin/authentic').then(res=>res.json());
 
-        let principal = fetch('http://localhost:8080/admin/authentic').then(res=>res.json());
+    document.querySelector('#auth_name').innerHTML = principal.name;
 
-        let getRoles = '';
-        principal.roles.forEach(x=> getRoles += x.role.substring(5))
+    let allRoles = '';
+    principal.roles.forEach(x=>allRoles += x.role.substring(5) + ' ');
+    document.querySelector('#auth_roles').innerHTML = allRoles;
+    return principal;
+}
 
-        roles.innerHTML = getRoles;
-        name.innerHTML = principal.name;*/
-
-fetch('http://localhost:8080/admin/authentic').then(res=>res.json()).then(data=>authName.innerHTML = data.name);
-authName = document.querySelector('#auth_name');
-
-
-let roles = '';
-fetch('http://localhost:8080/admin/authentic').then(res=>res.json()).then(data=>
-    data.roles.forEach(x=> roles += x.role.substring(5))
-)
-document.querySelector('#auth_roles').innerHTML = roles;
-
-
-
+getPrincipal()
 </script>
 
 </body>
