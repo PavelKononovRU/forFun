@@ -1,30 +1,22 @@
-const url = "http://localhost:8080/admin/people";
+async function getPrincipal() {
+    let principal = await fetch('http://localhost:8080/admin/authentic').then(res=>res.json());
 
-const credentials = btoa("Pavel:apple")
+        let allRoles = '';
+        principal.roles.forEach(x=>allRoles += x.role.substring(5) + ' ');
+        document.querySelector('#auth_roles').innerHTML = allRoles;
+        document.querySelector('#auth_name').innerHTML = principal.name;
 
-const container = document.querySelector('#tbody');
-
-let result = '';
-
-const show = (users) => {
-    users.forEach(user => {
-        result += `   <tr>
-                        <td>хуй</td>
-                        <td>${user.name}</td>
-                        <td>${user.surname}</td>
-                        <td>${user.email}</td>  
-                        <td>${user.age}</td>  
-                        <td>${user.role}</td>
-                    </tr>
-                 `
-        //container.innerText = result;
-    })
+    const data = document.querySelector('#person_info');
+    data.innerHTML = `<tr>
+                          <td>${principal.id}</td>
+                          <td>${principal.name}</td>
+                          <td>${principal.surname}</td>
+                          <td>${principal.email}</td>
+                          <td>${principal.age}</td>
+                           <td>${allRoles}</td>
+                     </tr>
+                     `;
 }
+getPrincipal()
 
-fetch(url)
-    .then(res => res.json())
-    .then(data => show(data))
-    //.then(x => console.log(x))
-    .catch(error => console.log(error))
 
-console.log(show);
