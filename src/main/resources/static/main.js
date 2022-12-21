@@ -224,6 +224,7 @@ async function addNewUserButtonListener() {
                 surname: newUserForm.surname.value,
                 email: newUserForm.email.value,
                 age: newUserForm.age.value,
+                username: newUserForm.username.value,
                 password: newUserForm.password.value,
                 roles: newUserRoles
             })
