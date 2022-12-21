@@ -2,7 +2,7 @@
 $(document).ready(async function () {
     let principal = await getPrincipal();
     let roleAdmin = false;
-    principal.roles.forEach(role => role.substring(5) === "ADMIN" ? roleAdmin = true : {});
+    principal.roles.forEach(role => role.role.substring(5) === "ADMIN" ? roleAdmin = true : {});
     if (roleAdmin) {
         await getAllUsers();
         await addEditUserButtonListener();
@@ -24,7 +24,7 @@ $(document).ready(async function () {
     } else {
         $("#btnInfoPanel").click();
         $("#btnAdminPanel").hide();
-        document.title = "User information-page";
+        document.title = "Person Info";
     }
 
 });
@@ -92,9 +92,9 @@ async function showEditModal(id) {
     form.id.value = user.id;
     form.name.value = user.name;
     form.surname.value = user.surname;
-    form.age.value = user.age;
     form.email.value = user.email;
-    fetch("http://localhost:8080/admin/roles/")
+    form.age.value = user.age;
+    fetch("http://localhost:8080/admin/roles")
         .then(response => response.json())
         .then(roles => {
             roles.forEach(role => {
@@ -116,7 +116,7 @@ async function showEditModal(id) {
 
 /*Edit user*/
 async function addEditUserButtonListener() {
-    const editForm = document.forms["formEditUser"];
+    const editForm = document.forms["EditPerson"];
     editForm.addEventListener("submit", event => {
         event.preventDefault();
         let editUserRoles = [];
@@ -129,17 +129,17 @@ async function addEditUserButtonListener() {
             }
         }
 
-        fetch(`http://localhost:8080/api/users/${editForm.id.value}`, {
-            method: "PUT",
+        fetch(`http://localhost:8080/admin/person/${editForm.id.value}`, {
+            method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 id: editForm.id.value,
-                firstName: editForm.firstName.value,
-                lastName: editForm.lastName.value,
-                age: editForm.age.value,
+                firstName: editForm.name.value,
+                lastName: editForm.surname.value,
                 email: editForm.email.value,
+                age: editForm.age.value,
                 password: editForm.password.value,
                 roles: editUserRoles
             })
@@ -154,7 +154,7 @@ async function addEditUserButtonListener() {
 async function showDeleteModal(id) {
     $("#DeletePerson").empty();
     let user = await getUser(id);
-    let form = document.forms["formDeleteUser"];
+    let form = document.forms["DeletePerson"];
     form.id.value = user.id;
     form.firstName.value = user.firstName;
     form.lastName.value = user.lastName;
@@ -172,10 +172,10 @@ async function showDeleteModal(id) {
 
 /*Delete user*/
 async function addDeleteUserButtonListener() {
-    const deleteForm = document.forms["formDeleteUser"];
+    const deleteForm = document.forms["DeletePerson"];
     deleteForm.addEventListener("submit", event => {
         event.preventDefault();
-        fetch(`http://localhost:8080/api/users/${deleteForm.id.value}`, {
+        fetch(`http://localhost:8080/admin/person/${deleteForm.id.value}`, {
             method: "DELETE"
         }).then(() => {
             $("#deleteFormCloseButton").click();
@@ -186,22 +186,22 @@ async function addDeleteUserButtonListener() {
 
 /*Prepare new user roles*/
 async function showNewUserTab() {
-    let roles = await fetch("http://localhost:8080/api/roles")
+    let roles = await fetch("http://localhost:8080/admin/roles")
         .then(response => response.json());
     for (let role of roles) {
         let optionElement = document.createElement("option");
-        optionElement.text = role.substring(5);
+        optionElement.text = role.role.substring(5);
         optionElement.value = role.id;
         if (role.id === 2) {
             optionElement.selected = true;
         }
-        document.getElementById("newUserRoles").appendChild(optionElement);
+        document.getElementById("newPersonRoles").appendChild(optionElement);
     }
 }
 
 /*Add new user*/
 async function addNewUserButtonListener() {
-    const newUserForm = document.forms["formNewUser"];
+    const newUserForm = document.forms["formNewPerson"];
     newUserForm.addEventListener("submit", event => {
         event.preventDefault();
         let newUserRoles = [];
@@ -214,16 +214,16 @@ async function addNewUserButtonListener() {
                 })
             }
         }
-        fetch("http://localhost:8080/api/users", {
+        fetch("http://localhost:8080/admin/people", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                firstName: newUserForm.name.value,
-                lastName: newUserForm.surname.value,
-                age: newUserForm.age.value,
+                name: newUserForm.name.value,
+                surname: newUserForm.surname.value,
                 email: newUserForm.email.value,
+                age: newUserForm.age.value,
                 password: newUserForm.password.value,
                 roles: newUserRoles
             })

@@ -88,37 +88,35 @@
                                     <tr>
                                         <td>
                                             <div class="container col-4">
-                                                <form id="formNewUser" class="text-center">
-                                                    <label class="form-label fw-bold  mt-3" for="firstName">First
-                                                        name</label>
-                                                    <input class="form-control" type="text" id="firstName"
-                                                           placeholder="First name" required>
+                                                <form id="formNewPerson" class="text-center">
+                                                    <label class="form-label fw-bold  mt-3" for="name">Name</label>
+                                                    <input class="form-control" type="text" id="name"
+                                                           placeholder="Enter Name" required>
 
-                                                    <label class="form-label fw-bold  mt-3" for="lastName">Last
-                                                        name</label>
-                                                    <input class="form-control" type="text" id="lastName"
-                                                           placeholder="Last name" required>
-
-                                                    <label class="form-label fw-bold  mt-3" for="age">Age</label>
-                                                    <input class="form-control" type="number" id="age" placeholder="Age"
-                                                           required>
+                                                    <label class="form-label fw-bold  mt-3" for="surname">Surname</label>
+                                                    <input class="form-control" type="text" id="surname"
+                                                           placeholder="Enter Surname" name="surname"  required>
 
                                                     <label class="form-label fw-bold  mt-3" for="email">Email</label>
                                                     <input class="form-control" type="email" id="email"
-                                                           placeholder="Email" required>
+                                                           placeholder="Email" name="email" required>
+
+                                                    <label class="form-label fw-bold  mt-3" for="age">Age</label>
+                                                    <input class="form-control" type="number" id="age" placeholder="Enter Age" name="age"
+                                                           required>
 
                                                     <label class="form-label fw-bold  mt-3"
                                                            for="password">Password</label>
                                                     <input class="form-control" type="password" id="password"
-                                                           placeholder="Password" required>
+                                                           placeholder="Password" name="password" required>
 
                                                     <label class="form-label fw-bold  mt-3"
-                                                           for="newUserRoles">Roles</label>
-                                                    <select class="form-select" id="newUserRoles" name="roles" size="2"
+                                                           for="newPersonRoles">Roles</label>
+                                                    <select class="form-select" id="newPersonRoles" name="roles" size="2"
                                                             multiple required>
                                                     </select>
 
-                                                    <input type="submit" value="Add new user"
+                                                    <input type="submit" value="Add New Person"
                                                            class="btn btn-success mt-3">
                                                 </form>
                                             </div>
@@ -130,7 +128,7 @@
                         </div>
                     </div>
                 </div>
-                <!--User info tab-->
+                <!--Person Info Tab-->
                 <div class="tab-pane" id="userInfoPanel" role="tabpanel">
                     <div class="container-fluid vh-100 ms-1 mt-3">
                         <h1>People Information</h1>
@@ -192,26 +190,25 @@
                                     <input type="number" id="editId" class="form-control" name="id" disabled>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold" for="editName">First name</label>
-                                    <input type="text" id="editName" class="form-control" name="firstName"
+                                    <label class="form-label fw-bold" for="editName">Name</label>
+                                    <input type="text" id="editName" class="form-control" name="name"
                                            required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold" for="editSurname">Last name</label>
-                                    <input type="text" id="editSurname" class="form-control" name="lastName" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label fw-bold" for="editAge">Age</label>
-                                    <input type="number" id="editAge" class="form-control" name="age" required>
+                                    <label class="form-label fw-bold" for="editSurname">Surname</label>
+                                    <input type="text" id="editSurname" class="form-control" name="surname" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label fw-bold" for="editEmail">Email</label>
                                     <input type="email" id="editEmail" class="form-control" name="email" required>
                                 </div>
                                 <div class="mb-3">
+                                    <label class="form-label fw-bold" for="editAge">Age</label>
+                                    <input type="number" id="editAge" class="form-control" name="age" required>
+                                </div>
+                                <div class="mb-3">
                                     <label class="form-label fw-bold" for="editPassword">Password</label>
-                                    <input type="password" id="editPassword" class="form-control" name="password"
-                                           placeholder="Password">
+                                    <input type="password" id="editPassword" class="form-control" name="password">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label fw-bold" for="editRolesUser">Roles</label>
@@ -243,7 +240,7 @@
         <div class="modal-content">
             <form id="DeletePerson">
                 <div class="modal-header">
-                    <h4 class="modal-title">Delete user</h4>
+                    <h4 class="modal-title">Delete Person</h4>
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
@@ -255,22 +252,22 @@
                                     <input type="number" id="deleteId" class="form-control" name="id" disabled>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold" for="deleteFirstName">First name</label>
-                                    <input type="text" id="deleteFirstName" class="form-control" name="firstName"
+                                    <label class="form-label fw-bold" for="deleteFirstName">Name</label>
+                                    <input type="text" id="deleteFirstName" class="form-control" name="name"
                                            disabled>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold" for="deleteLastName">Last name</label>
-                                    <input type="text" id="deleteLastName" class="form-control" name="lastName"
+                                    <label class="form-label fw-bold" for="deleteLastName">Surname</label>
+                                    <input type="text" id="deleteLastName" class="form-control" name="surname"
                                            disabled>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label fw-bold" for="deleteAge">Age</label>
-                                    <input type="number" id="deleteAge" class="form-control" name="age" disabled>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label fw-bold" for="deleteEmail">Email</label>
                                     <input type="text" id="deleteEmail" class="form-control" name="email" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold" for="deleteAge">Age</label>
+                                    <input type="number" id="deleteAge" class="form-control" name="age" disabled>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label fw-bold" for="deleteRolesUser">Roles</label>
@@ -302,6 +299,13 @@
 <script src="/main.js"></script>
 <script>getAllUsers()</script>
 <script>getPrincipal()</script>
-<script>getUser()</script>
+<!--<script>getUser(1)</script>
+<script>showEditModal(id)</script>
+<script>showDeleteModal(id)</script>-->
+
+<!--<script>addEditUserButtonListener()</script>
+<script>addDeleteUserButtonListener()</script>-->
+<!--<script>showNewUserTab()</script>
+<script>addNewUserButtonListener()</script>-->
 </body>
 </html>
