@@ -66,8 +66,8 @@
                                                     <th>Email</th>
                                                     <th>Age</th>
                                                     <th>Role</th>
-                                                    <th>Edit</th>
-                                                    <th>Delete</th>
+                                                    <!--<th>Edit</th>
+                                                    <th>Delete</th>-->
                                                 </tr>
                                                 </thead>
                                                 <tbody id="people_info">
@@ -93,16 +93,18 @@
                                                     <input class="form-control" type="text" id="name"
                                                            placeholder="Enter Name" required>
 
-                                                    <label class="form-label fw-bold  mt-3" for="surname">Surname</label>
+                                                    <label class="form-label fw-bold  mt-3"
+                                                           for="surname">Surname</label>
                                                     <input class="form-control" type="text" id="surname"
-                                                           placeholder="Enter Surname" name="surname"  required>
+                                                           placeholder="Enter Surname" name="surname" required>
 
                                                     <label class="form-label fw-bold  mt-3" for="email">Email</label>
                                                     <input class="form-control" type="email" id="email"
                                                            placeholder="Email" name="email" required>
 
                                                     <label class="form-label fw-bold  mt-3" for="age">Age</label>
-                                                    <input class="form-control" type="number" id="age" placeholder="Enter Age" name="age"
+                                                    <input class="form-control" type="number" id="age"
+                                                           placeholder="Enter Age" name="age"
                                                            required>
 
                                                     <label class="form-label fw-bold  mt-3"
@@ -112,7 +114,8 @@
 
                                                     <label class="form-label fw-bold  mt-3"
                                                            for="newPersonRoles">Roles</label>
-                                                    <select class="form-select" id="newPersonRoles" name="roles" size="2"
+                                                    <select class="form-select" id="newPersonRoles" name="roles"
+                                                            size="2"
                                                             multiple required>
                                                     </select>
 
@@ -187,7 +190,7 @@
                             <div class="container col-6">
                                 <div class="mb-3">
                                     <label class="form-label fw-bold" for="editId">ID</label>
-                                    <input type="number" id="editId" class="form-control" name="id" disabled>
+                                    <input type="number" id="editId" class="form-control" name="id" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label fw-bold" for="editName">Name</label>
@@ -206,10 +209,10 @@
                                     <label class="form-label fw-bold" for="editAge">Age</label>
                                     <input type="number" id="editAge" class="form-control" name="age" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label fw-bold" for="editPassword">Password</label>
-                                    <input type="password" id="editPassword" class="form-control" name="password">
-                                </div>
+                                <!--                                <div class="mb-3">
+                                                                    <label class="form-label fw-bold" for="editPassword">Password</label>
+                                                                    <input type="password" id="editPassword" class="form-control" name="password">
+                                                                </div>-->
                                 <div class="mb-3">
                                     <label class="form-label fw-bold" for="editRolesUser">Roles</label>
                                     <select id="editRolesUser" class="form-select" multiple name="roles" size="2"
@@ -270,8 +273,8 @@
                                     <input type="number" id="deleteAge" class="form-control" name="age" disabled>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold" for="deleteRolesUser">Roles</label>
-                                    <select id="deleteRolesUser" class="form-select" multiple name="roles" size="2"
+                                    <label class="form-label fw-bold" for="deleteRolesPerson">Roles</label>
+                                    <select id="deleteRolesPerson" class="form-select" multiple name="roles" size="2"
                                             disabled>
                                     </select>
                                 </div>
@@ -297,8 +300,8 @@
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="/main.js"></script>
-<script>getAllUsers()</script>
-<script>getPrincipal()</script>
+<!--<script>getAllUsers()</script>-->
+<!--<script>getPrincipal()</script>-->
 <!--<script>getUser(1)</script>
 <script>showEditModal(id)</script>
 <script>showDeleteModal(id)</script>-->

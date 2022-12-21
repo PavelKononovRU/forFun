@@ -4,7 +4,6 @@ import alphabravo.springsecurity.ExceptionHandler.NoSuchPersonException;
 import alphabravo.springsecurity.ExceptionHandling.ExceptionInformation;
 import alphabravo.springsecurity.model.Person;
 import alphabravo.springsecurity.model.Role;
-import alphabravo.springsecurity.repositories.RoleRepo;
 import alphabravo.springsecurity.service.PersonDetailsService;
 import alphabravo.springsecurity.service.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,59 +14,58 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/*@CrossOrigin*/
 @RequestMapping("/admin")
 @RestController
 public class MainAdminController {
     private final RoleServiceImpl roleService;
 
     private final PersonDetailsService personDetailsService;
-    private final RoleRepo roleRepo;
 
     @Autowired
-    public MainAdminController(RoleServiceImpl roleService, PersonDetailsService personDetailsService,
-                               RoleRepo roleRepo) {
+    public MainAdminController(RoleServiceImpl roleService, PersonDetailsService personDetailsService) {
         this.roleService = roleService;
         this.personDetailsService = personDetailsService;
-        this.roleRepo = roleRepo;
     }
 
-    /*Получение всех пользователей*/
     @GetMapping("/people")
-    public List<Person> peopleInfo() {
-        return personDetailsService.allPersons();
+    public ResponseEntity<List<Person>> peopleInfo() {
+        List<Person> people = personDetailsService.allPersons();
+        return ((people != null) && (!people.isEmpty()))
+                ? new ResponseEntity<>(people, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    /*Получение конкретного пользователя по id*/
     @GetMapping("/person/{id}")
-    public Person getPerson(@PathVariable long id) {
+    public ResponseEntity<Person> getPerson(@PathVariable Long id) {
         Person person = personDetailsService.getPersonId(id);
-        if (person == null) throw new NoSuchPersonException("Person with id= " + id + " was not found");
-        return person;
+        return (person != null)
+                ? new ResponseEntity<>(person, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    /*Удаление пользователя по id*/
     @DeleteMapping("/person/{id}")
-    public String delete(@PathVariable long id) {
-        Person person = personDetailsService.getPersonId(id);
-        if (person == null) throw new NoSuchPersonException("Person not Found");
+    public ResponseEntity<Person> deletePerson(@PathVariable Long id) {
+        if (personDetailsService.getPersonId(id) == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         personDetailsService.remove(id);
-
-        return "Person was deleted";
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    /*Добавление нового пользователя*/
     @PostMapping("/people")
-    public String addNewPerson(@RequestBody Person person) {
+    public ResponseEntity<Person> addNewPerson(@RequestBody Person person) {
         personDetailsService.savePerson(person);
-        return "Person was added";
+        return new ResponseEntity<>(person, HttpStatus.CREATED);
     }
 
     /*Обновление пользователя*/
-    @PutMapping("/people")
-    public String updatePerson(@RequestBody Person person) {
-        personDetailsService.savePerson(person);
-        return "Person was updated";
+    @PutMapping("/person/{id}")
+    public ResponseEntity<Person> updatePerson(@RequestBody Person person, @PathVariable long id) {
+        if (personDetailsService.getPersonId(id) == null) {
+            return new ResponseEntity<>(person, HttpStatus.NOT_FOUND);
+        }
+        personDetailsService.toUpdatePerson(id, person);
+        return new ResponseEntity<>(person, HttpStatus.OK);
     }
 
     @ExceptionHandler
@@ -79,7 +77,7 @@ public class MainAdminController {
 
     //
     @GetMapping("/authentic")
-    public ResponseEntity<Person> getAuthent(@AuthenticationPrincipal Person person) {
+    public ResponseEntity<Person> getAuthentic(@AuthenticationPrincipal Person person) {
         return new ResponseEntity<>(person, HttpStatus.OK);
     }
 

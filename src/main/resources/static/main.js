@@ -88,12 +88,12 @@ async function getAllUsers() {
 async function showEditModal(id) {
     $("#editRolesUser").empty();
     let user = await getUser(id);
-    let form = document.forms["EditPerson"];
-    form.id.value = user.id;
-    form.name.value = user.name;
-    form.surname.value = user.surname;
-    form.email.value = user.email;
-    form.age.value = user.age;
+    let formForEdit = document.forms["EditPerson"];
+    formForEdit.id.value = user.id;
+    formForEdit.name.value = user.name;
+    formForEdit.surname.value = user.surname;
+    formForEdit.email.value = user.email;
+    formForEdit.age.value = user.age;
     fetch("http://localhost:8080/admin/roles")
         .then(response => response.json())
         .then(roles => {
@@ -105,7 +105,7 @@ async function showEditModal(id) {
                     }
                 }
                 let optionElement = document.createElement("option");
-                optionElement.text = role.substring(5);
+                optionElement.text = role.role.substring(5);
                 optionElement.value = role.id;
                 if (selectedRole) optionElement.selected = true;
                 document.getElementById("editRolesUser").appendChild(optionElement);
@@ -130,17 +130,17 @@ async function addEditUserButtonListener() {
         }
 
         fetch(`http://localhost:8080/admin/person/${editForm.id.value}`, {
-            method: "PATCH",
+            method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 id: editForm.id.value,
-                firstName: editForm.name.value,
-                lastName: editForm.surname.value,
+                name: editForm.name.value,
+                surname: editForm.surname.value,
                 email: editForm.email.value,
                 age: editForm.age.value,
-                password: editForm.password.value,
+                /*                password: editForm.password.value,*/
                 roles: editUserRoles
             })
         }).then(() => {
@@ -152,20 +152,20 @@ async function addEditUserButtonListener() {
 
 /*заполнение Delete modal*/
 async function showDeleteModal(id) {
-    $("#DeletePerson").empty();
+    $("#deleteRolesPerson").empty();
     let user = await getUser(id);
-    let form = document.forms["DeletePerson"];
-    form.id.value = user.id;
-    form.firstName.value = user.firstName;
-    form.lastName.value = user.lastName;
-    form.age.value = user.age;
-    form.email.value = user.email;
+    let formForDelete = document.forms["DeletePerson"];
+    formForDelete.id.value = user.id;
+    formForDelete.name.value = user.name;
+    formForDelete.surname.value = user.surname;
+    formForDelete.email.value = user.email;
+    formForDelete.age.value = user.age;
 
     user.roles.forEach(role => {
         let optionElement = document.createElement("option");
-        optionElement.text = role.substring(5);
+        optionElement.text = role.role.substring(5);
         optionElement.value = role.id;
-        document.getElementById("deleteRolesUser").appendChild(optionElement);
+        document.getElementById("deleteRolesPerson").appendChild(optionElement);
     });
 }
 
@@ -229,6 +229,7 @@ async function addNewUserButtonListener() {
             })
         }).then(() => {
             newUserForm.reset();
+            alert('Пользователь добавлен')
             getAllUsers();
             $("#navLinkAllUsersPanel").click();
         });
