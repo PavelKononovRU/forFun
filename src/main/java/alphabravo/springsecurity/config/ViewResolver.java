@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class ViewResolver implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/user").setViewName("userinfo");
-        registry.addViewController("/admin").setViewName("admin");
+        registry.addViewController("/user").setViewName("main");
+        registry.addViewController("/admin").setViewName("main");
     }
 }

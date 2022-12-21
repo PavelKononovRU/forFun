@@ -57,7 +57,7 @@ public class DataInitValues {
 
         Person hr = personRepo.findPersonByUsername("hr");
         if (hr == null) hr = new Person("hr", "work", "John", "Peterson", 43,
-                "Peterson6@gmail.com", List.of(user));
+                "Peterson6@gmail.com", List.of(user, admin));
         hr.setPassword(passwordEncoder.encode(hr.getPassword()));
         personRepo.save(hr);
 

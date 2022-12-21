@@ -3,13 +3,14 @@ package alphabravo.springsecurity.controller;
 import alphabravo.springsecurity.ExceptionHandler.NoSuchPersonException;
 import alphabravo.springsecurity.ExceptionHandling.ExceptionInformation;
 import alphabravo.springsecurity.model.Person;
+import alphabravo.springsecurity.model.Role;
+import alphabravo.springsecurity.repositories.RoleRepo;
 import alphabravo.springsecurity.service.PersonDetailsService;
 import alphabravo.springsecurity.service.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,11 +22,14 @@ public class MainAdminController {
     private final RoleServiceImpl roleService;
 
     private final PersonDetailsService personDetailsService;
+    private final RoleRepo roleRepo;
 
     @Autowired
-    public MainAdminController(RoleServiceImpl roleService, PersonDetailsService personDetailsService) {
+    public MainAdminController(RoleServiceImpl roleService, PersonDetailsService personDetailsService,
+                               RoleRepo roleRepo) {
         this.roleService = roleService;
         this.personDetailsService = personDetailsService;
+        this.roleRepo = roleRepo;
     }
 
     /*Получение всех пользователей*/
@@ -75,8 +79,16 @@ public class MainAdminController {
 
     //
     @GetMapping("/authentic")
-    public ResponseEntity <Person> getAuthent(@AuthenticationPrincipal Person person) {
+    public ResponseEntity<Person> getAuthent(@AuthenticationPrincipal Person person) {
         return new ResponseEntity<>(person, HttpStatus.OK);
+    }
+
+    @GetMapping("/roles")
+    public ResponseEntity<List<Role>> allRoles() {
+        List<Role> roles = roleService.getAllRoles();
+        return ((roles != null) && (!roles.isEmpty()))
+                ? new ResponseEntity<>(roles, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
 

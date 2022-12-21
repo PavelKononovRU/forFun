@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -24,7 +25,7 @@
     </form>
 </div>
 
-<!--    body-->
+&lt;!&ndash;    body&ndash;&gt;
 <div class="container-fluid">
     <div class="row">
         <div class="col-2 ps-0 pe-0">
@@ -42,7 +43,7 @@
                     <a class="nav-link" data-bs-toggle="tab" href="#newUser">New Person</a>
                 </nav>
                 <div class="tab-content">
-                    <!--tab People-->
+                    &lt;!&ndash;tab People&ndash;&gt;
                     <div class="tab-pane active" id="People" role="tabpanel">
                         <table class="table table-striped table-bordered">
                             <tbody>
@@ -65,10 +66,10 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            <!--<tr th:each="user : ${people}">-->
+                                            &lt;!&ndash;<tr th:each="user : ${people}">&ndash;&gt;
                                             <tr>
                                                 <td id="people_info">
-   <!--                                                 <td th:text="${user.getId()}">{ID}</td>
+   &lt;!&ndash;                                                 <td th:text="${user.getId()}">{ID}</td>
                                                     <td th:text="${user.getName()}">{First Name}</td>
                                                     <td th:text="${user.getSurname()}">{Last Name}</td>
                                                     <td th:text="${user.getEmail()}">{Age}</td>
@@ -80,14 +81,14 @@
                                                                     th:text="${role.getRole().substring(5)}"/>
                                                             </tr>
                                                         </table>
-                                                    </td>-->
+                                                    </td>&ndash;&gt;
                                                 <td>
                                                 <button class="btn btn-info" id="editButton" data-bs-toggle="modal"
                                                         data-bs-target="#editModal"
                                                         th:attrappend="data-bs-target=${user.getId()}">
                                                     Edit
                                                 </button>
-                                                <!--Modal EDIT-->
+                                                &lt;!&ndash;Modal EDIT&ndash;&gt;
                                                 <div id="editModal" th:attrappend="id=${user.getId()}"
                                                      class="modal fade">
                                                     <div class="modal-dialog">
@@ -193,7 +194,7 @@
                                                         th:attrappend="data-bs-target=${user.getId()}">
                                                     Delete
                                                 </button>
-                                                <!--Modal DELETE-->
+                                                &lt;!&ndash;Modal DELETE&ndash;&gt;
                                                 <div id="deleteModal" th:attrappend="id=${user.getId()}"
                                                      class="modal fade">
                                                     <div class="modal-dialog">
@@ -281,7 +282,7 @@
                                             </td>
                                             </tr>
 
-                                                <!--<tr>
+                                                &lt;!&ndash;<tr>
                                                     <td th:text="${user.getId()}">{ID}</td>
                                                     <td th:text="${user.getName()}">{First Name}</td>
                                                     <td th:text="${user.getSurname()}">{Last Name}</td>
@@ -494,7 +495,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>-->
+                                            </td>&ndash;&gt;
                                         </tr>
                                         </tbody>
                                     </table>
@@ -503,7 +504,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <!--tab new User-->
+                    &lt;!&ndash;tab new User&ndash;&gt;
                     <div class="tab-pane" id="newUser" role="tabpanel">
                         <table class="table table-striped table-bordered">
                             <tbody>
@@ -609,4 +610,4 @@
         .then(data => show(data))
         .catch(error => console.log(error))
 </script>
-</html>
+</html>-->
