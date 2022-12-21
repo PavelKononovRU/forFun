@@ -50,7 +50,7 @@ public class MyWebConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
 
                 .and()
-                .formLogin().defaultSuccessUrl("/admin", true)
+                .formLogin().defaultSuccessUrl("/user", true)
                 .and()
                 .logout()
                 .and()

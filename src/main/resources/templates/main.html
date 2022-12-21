@@ -13,9 +13,9 @@
 
 <div id="header" class="d-flex p-0 bg-dark">
     <div class="text-white w-100 pb-1 fs-4">
-        <span class="align-middle ms-3  fw-bold" id="auth_name">Стопарик</span>
-        <span class="align-middle">with roles:</span>
-        <span class="align-middle" id="auth_roles">Огурчик</span>
+        <span class="align-middle ms-3  fw-bold" id="auth_name"></span>
+        <span class="align-middle"></span>
+        <span class="align-middle" id="auth_roles"></span>
     </div>
     <form action="/logout" method="post">
         <input type="submit" value="Logout" class="btn text-secondary bg-dark">
@@ -45,7 +45,7 @@
                             <button id="navLinkAllUsersPanel" class="nav-link active" data-bs-toggle="tab"
                                     href="#allUsers">Users table
                             </button>
-                            <button class="nav-link" data-bs-toggle="tab" href="#newUserTab">New User</button>
+                            <button class="nav-link" data-bs-toggle="tab" href="#newUserTab">New Person</button>
                         </nav>
                         <div class="tab-content">
                             <!--tab all Users-->
@@ -53,7 +53,7 @@
                                 <table class="table table-striped table-bordered">
                                     <tbody>
                                     <tr>
-                                        <th class="h4 px-4 py-2">All users</th>
+                                        <th class="h4 px-4 py-2">People</th>
                                     </tr>
                                     <tr>
                                         <td class="bg-white px-4 py-4">
@@ -66,8 +66,6 @@
                                                     <th>Email</th>
                                                     <th>Age</th>
                                                     <th>Role</th>
-                                                    <!--<th>Edit</th>
-                                                    <th>Delete</th>-->
                                                 </tr>
                                                 </thead>
                                                 <tbody id="people_info">
@@ -83,7 +81,7 @@
                                 <table class="table table-striped table-bordered">
                                     <tbody>
                                     <tr>
-                                        <th class="h4 px-4 py-2">Add new user</th>
+                                        <th class="h4 px-4 py-2">Add New Person</th>
                                     </tr>
                                     <tr>
                                         <td>
@@ -214,10 +212,6 @@
                                     <label class="form-label fw-bold" for="editAge">Age</label>
                                     <input type="number" id="editAge" class="form-control" name="age" required>
                                 </div>
-                                <!--                                <div class="mb-3">
-                                                                    <label class="form-label fw-bold" for="editPassword">Password</label>
-                                                                    <input type="password" id="editPassword" class="form-control" name="password">
-                                                                </div>-->
                                 <div class="mb-3">
                                     <label class="form-label fw-bold" for="editRolesUser">Roles</label>
                                     <select id="editRolesUser" class="form-select" multiple name="roles" size="2"
@@ -305,15 +299,5 @@
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="/main.js"></script>
-<!--<script>getAllUsers()</script>-->
-<!--<script>getPrincipal()</script>-->
-<!--<script>getUser(1)</script>
-<script>showEditModal(id)</script>
-<script>showDeleteModal(id)</script>-->
-
-<!--<script>addEditUserButtonListener()</script>
-<script>addDeleteUserButtonListener()</script>-->
-<!--<script>showNewUserTab()</script>
-<script>addNewUserButtonListener()</script>-->
 </body>
 </html>
