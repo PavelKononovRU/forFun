@@ -94,6 +94,8 @@ async function showEditModal(id) {
     formForEdit.surname.value = user.surname;
     formForEdit.email.value = user.email;
     formForEdit.age.value = user.age;
+    formForEdit.username.value = user.username;
+    formForEdit.password.value = user.password;
     fetch("http://localhost:8080/admin/roles")
         .then(response => response.json())
         .then(roles => {
@@ -140,7 +142,8 @@ async function addEditUserButtonListener() {
                 surname: editForm.surname.value,
                 email: editForm.email.value,
                 age: editForm.age.value,
-                /*                password: editForm.password.value,*/
+                username: editForm.username.value,
+                password: editForm.password.value,
                 roles: editUserRoles
             })
         }).then(() => {

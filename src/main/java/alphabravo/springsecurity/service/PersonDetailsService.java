@@ -33,21 +33,6 @@ public class PersonDetailsService implements UserDetailsService, PersonDetails {
 
     @Override
     @Transactional
-    public void toUpdatePerson(long id, Person updatedPerson) {
-        Person personForUpdate = personRepo.findById(id).orElse(new Person());
-        personForUpdate.setId(updatedPerson.getId());
-        personForUpdate.setName(updatedPerson.getName());
-        personForUpdate.setSurname(updatedPerson.getSurname());
-        personForUpdate.setEmail(updatedPerson.getEmail());
-        personForUpdate.setAge(updatedPerson.getAge());
-        personForUpdate.setUsername(updatedPerson.getUsername());
-        personForUpdate.setPassword(updatedPerson.getPassword());
-        personForUpdate.setRoles(updatedPerson.getRoles());
-        personRepo.save(personForUpdate);
-    }
-
-    @Override
-    @Transactional
     public void savePerson(Person person) {
         person.setPassword(passwordEncoder.encode(person.getPassword()));
         personRepo.save(person);
@@ -60,12 +45,12 @@ public class PersonDetailsService implements UserDetailsService, PersonDetails {
     }
 
     @Override
-    public Person getPersonId(long id) {
+    public Person getPersonById(long id) {
         return personRepo.findById(id).orElse(new Person());
     }
 
     @Override
-    public List<Person> allPersons() {
+    public List<Person> getPeople() {
         return personRepo.findAll();
     }
 }

@@ -8,11 +8,9 @@ import java.util.List;
 public interface PersonDetails {
     void savePerson(Person person);
 
-    void toUpdatePerson(long id, Person updatedPerson);
-
     void remove(long id);
 
-    Person getPersonId(long id);
+    Person getPersonById(long id);
 
-    List<Person> allPersons();
+    List<Person> getPeople();
 }

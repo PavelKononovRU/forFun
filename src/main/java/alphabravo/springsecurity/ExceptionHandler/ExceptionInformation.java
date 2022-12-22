@@ -1,4 +1,4 @@
-package alphabravo.springsecurity.ExceptionHandling;
+package alphabravo.springsecurity.ExceptionHandler;
 
 public class ExceptionInformation {
     private String inform;

@@ -37,11 +37,11 @@ public class DataInitValues {
         if (admin == null) admin = new Role("ROLE_ADMIN");
         roleRepo.save(admin);
 
-        Person Pavel = personRepo.findPersonByUsername("Pavel");
-        if (Pavel == null) Pavel = new Person("Pavel", "apple", "Pavel",
+        Person Pasha = personRepo.findPersonByUsername("Pasha");
+        if (Pasha == null) Pasha = new Person("Pasha", "apple", "Pavel",
                 "Kononov", 28, "lovecars527@gmail.com", List.of(user, admin));
-        Pavel.setPassword(passwordEncoder.encode(Pavel.getPassword()));
-        personRepo.save(Pavel);
+        Pasha.setPassword(passwordEncoder.encode(Pasha.getPassword()));
+        personRepo.save(Pasha);
 
         Person Dima = personRepo.findPersonByUsername("Dima");
         if (Dima == null) Dima = new Person("Dima", "green", "Dima",
