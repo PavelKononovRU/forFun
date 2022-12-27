@@ -40,6 +40,23 @@ public class PersonDetailsService implements UserDetailsService, PersonDetails {
 
     @Override
     @Transactional
+    public void toUpdatePerson(long id, Person personFromClient) throws Exception {
+        Person personFromDataBase = personRepo.findById(id).
+                orElseThrow(() -> new Exception("Пользователь не найден"));
+
+        String passFromClient = personFromClient.getPassword();
+        String passFromDataBase = personFromDataBase.getPassword();
+
+        if (passFromClient.equals(passFromDataBase)) {
+            personRepo.save(personFromClient);
+        } else {
+            personFromClient.setPassword(passwordEncoder.encode(passFromClient));
+            personRepo.save(personFromClient);
+        }
+    }
+
+    @Override
+    @Transactional
     public void remove(long id) {
         personRepo.deleteById(id);
     }

@@ -5,6 +5,7 @@ import alphabravo.springsecurity.service.PersonDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,7 @@ public class PeopleRESTController {
     }
 
     @GetMapping("/people")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Person>> peopleInfo() {
         List<Person> people = personDetailsService.getPeople();
         return ((people != null) && (!people.isEmpty()))
@@ -38,6 +40,7 @@ public class PeopleRESTController {
     }
 
     @DeleteMapping("/person/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Person> deletePerson(@PathVariable Long id) {
         if (personDetailsService.getPersonById(id) == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -47,6 +50,7 @@ public class PeopleRESTController {
     }
 
     @PostMapping("/people")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Person> addNewPerson(@RequestBody Person person) {
         personDetailsService.savePerson(person);
         return new ResponseEntity<>(person, HttpStatus.CREATED);
@@ -54,11 +58,9 @@ public class PeopleRESTController {
 
     /*Обновление пользователя*/
     @PutMapping("/person/{id}")
-    public ResponseEntity<Person> updateUser(@RequestBody Person person, @PathVariable Long id) {
-        if (personDetailsService.getPersonById(id) == null) {
-            return new ResponseEntity<>(person, HttpStatus.NOT_FOUND);
-        }
-        personDetailsService.savePerson(person);
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Person> updateUser(@RequestBody Person person, @PathVariable Long id) throws Exception {
+        personDetailsService.toUpdatePerson(id, person);
         return new ResponseEntity<>(person, HttpStatus.OK);
     }
 

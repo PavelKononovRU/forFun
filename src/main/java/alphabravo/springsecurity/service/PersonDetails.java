@@ -12,5 +12,7 @@ public interface PersonDetails {
 
     Person getPersonById(long id);
 
+    void toUpdatePerson(long id, Person person) throws Exception;
+
     List<Person> getPeople();
 }
