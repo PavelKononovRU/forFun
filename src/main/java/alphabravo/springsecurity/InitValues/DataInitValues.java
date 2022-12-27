@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.List;
+import java.util.Set;
 
 @Component
 public class DataInitValues {
@@ -39,31 +39,31 @@ public class DataInitValues {
 
         Person Pasha = personRepo.findPersonByUsername("Pasha");
         if (Pasha == null) Pasha = new Person("Pasha", "apple", "Pavel",
-                "Kononov", 28, "lovecars527@gmail.com", List.of(user, admin));
+                "Kononov", 28, "lovecars527@gmail.com", Set.of(user, admin));
         Pasha.setPassword(passwordEncoder.encode(Pasha.getPassword()));
         personRepo.save(Pasha);
 
         Person Dima = personRepo.findPersonByUsername("Dima");
         if (Dima == null) Dima = new Person("Dima", "green", "Dima",
-                "Pomazkov", 29, "lovecars527@gmail.com", List.of(user));
+                "Pomazkov", 29, "lovecars527@gmail.com", Set.of(user, admin));
         Dima.setPassword(passwordEncoder.encode(Dima.getPassword()));
         personRepo.save(Dima);
 
         Person Nikita = personRepo.findPersonByUsername("Nikita");
         if (Nikita == null) Nikita = new Person("Nikita", "purple", "Nikita",
-                "Promyschlennikov", 26, "Promyh67527@gmail.com", List.of(user));
+                "Promyschlennikov", 26, "Promyh67527@gmail.com", Set.of(user, admin));
         Nikita.setPassword(passwordEncoder.encode(Nikita.getPassword()));
         personRepo.save(Nikita);
 
         Person hr = personRepo.findPersonByUsername("hr");
         if (hr == null) hr = new Person("hr", "work", "John", "Peterson", 43,
-                "Peterson6@gmail.com", List.of(user, admin));
+                "Peterson6@gmail.com", Set.of(user));
         hr.setPassword(passwordEncoder.encode(hr.getPassword()));
         personRepo.save(hr);
 
         Person employer = personRepo.findPersonByUsername("employer");
         if (employer == null) employer = new Person("employer", "hardwork", "Andrew", "Sneider",
-                57, "Andr456@gmail.com", List.of(user));
+                57, "Andr456@gmail.com", Set.of(user));
         employer.setPassword(passwordEncoder.encode(employer.getPassword()));
         personRepo.save(employer);
     }

@@ -7,9 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -43,10 +43,10 @@ public class Person implements UserDetails {
     @JoinTable(name = "people_roles",
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> roles = new ArrayList<>();
+    private Set<Role> roles = new HashSet<>();
 
     public Person(String username, String password, String name,
-                  String surname, int age, String email, List<Role> roles) {
+                  String surname, int age, String email, Set<Role> roles) {
         this.username = username;
         this.password = password;
         this.name = name;
