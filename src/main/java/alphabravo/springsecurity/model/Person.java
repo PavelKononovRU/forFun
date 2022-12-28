@@ -3,6 +3,8 @@ package alphabravo.springsecurity.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -43,6 +45,7 @@ public class Person implements UserDetails {
     @JoinTable(name = "people_roles",
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @BatchSize(size = 5)
     private Set<Role> roles = new HashSet<>();
 
     public Person(String username, String password, String name,

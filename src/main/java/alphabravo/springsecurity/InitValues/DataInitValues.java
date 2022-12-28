@@ -50,7 +50,7 @@ public class DataInitValues {
         personRepo.save(Dima);
 
         Person Nikita = personRepo.findPersonByUsername("Nikita");
-        if (Nikita == null) Nikita = new Person("Nikita", "purple", "Nikita",
+        if (Nikita == null) Nikita = new Person("Nikita67", "purple", "Nikita",
                 "Promyschlennikov", 26, "Promyh67527@gmail.com", Set.of(user, admin));
         Nikita.setPassword(passwordEncoder.encode(Nikita.getPassword()));
         personRepo.save(Nikita);

@@ -2,6 +2,7 @@ package alphabravo.springsecurity.model;
 
 
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class Role implements GrantedAuthority {
     @Column(name = "id")
     private long id;
     @NonNull
+    @BatchSize(size = 2)
     @Column(name = "role")
     private String role;
 

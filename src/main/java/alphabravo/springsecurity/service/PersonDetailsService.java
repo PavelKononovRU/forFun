@@ -4,6 +4,7 @@ import alphabravo.springsecurity.model.Person;
 import alphabravo.springsecurity.repositories.PersonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -44,13 +45,10 @@ public class PersonDetailsService implements UserDetailsService, PersonDetails {
         Person personFromDataBase = personRepo.findById(id).
                 orElseThrow(() -> new Exception("Пользователь не найден"));
 
-        String passFromClient = personFromClient.getPassword();
-        String passFromDataBase = personFromDataBase.getPassword();
-
-        if (passFromClient.equals(passFromDataBase)) {
+        if (personFromClient.getPassword().equals(personFromDataBase.getPassword())) {
             personRepo.save(personFromClient);
         } else {
-            personFromClient.setPassword(passwordEncoder.encode(passFromClient));
+            personFromClient.setPassword(passwordEncoder.encode(personFromClient.getPassword()));
             personRepo.save(personFromClient);
         }
     }
