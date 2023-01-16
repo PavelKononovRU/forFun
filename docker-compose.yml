@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  postgres:
+    image: 'postgres:15'
+    container_name: 'myAppDataBase'
+    environment:
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_PASSWORD=root'
+      - 'POSTGRES_HOST_AUTH_METHOD=trust'
+      - 'POSTGRES_DB=users'
+
+  application:
+    build: ./
+    container_name: 'java-app'
+    ports:
+      - "8080:8080"
+    links:
+      - 'postgres:localhost'
+    #environment:
+      #- 'SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/users'
+
+
+
+
